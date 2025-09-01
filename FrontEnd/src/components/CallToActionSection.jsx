@@ -10,7 +10,7 @@ function CallToActionSection() {
         textAlign: 'center',
         py: 8,
         px: 2,
-      }}
+      }} 
     >
       <Container maxWidth="md">
         <Typography

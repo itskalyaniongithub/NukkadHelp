@@ -3,7 +3,7 @@ import { Container, Typography, Grid, CardMedia,Box } from '@mui/material';
 
 function AboutUsSection() {
   return (
-    <Container maxWidth="lg" sx={{ py: 8 }}>
+    <Container id ="aboutUs" maxWidth="lg" sx={{ py: 8 }}>
       <Typography
         variant="h4"
         component="h2"
