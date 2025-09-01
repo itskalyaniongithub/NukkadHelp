@@ -14,7 +14,7 @@ function HeroSection() {
         color: 'primary.dark',
         py: 8,
         px: 2,
-      }}
+      }} id="Home"
     >
       <Container maxWidth="md">
         <Typography variant="h3" component="h1" gutterBottom sx={{ mb: 3 }}>
