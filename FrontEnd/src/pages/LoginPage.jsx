@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Box, Container, Typography, TextField, Button, Paper, Grid } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
+import googleIcon from '../assets/googleIcon.png'
+import { GoogleLogin } from '@react-oauth/google';
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -52,7 +54,7 @@ function LoginPage() {
               <Button
                 fullWidth
                 variant={userType === 'provider' ? 'contained' : 'outlined'}
-                color="secondary"
+                color="primary"
                 onClick={() => handleUserTypeChange('provider')}
               >
                 Provider
@@ -93,6 +95,10 @@ function LoginPage() {
           <Typography variant="body2" textAlign="center">
             Don't have an account? <Link to="/signup">Sign Up</Link>
           </Typography>
+          
+          <Box textAlign="center"  sx={{ justifyContent: 'center', display:'flex',mt: 3 }}>
+          <GoogleLogin onSuccess={(credentialResponse)=>{console.log(credentialResponse)}} onError={()=>console.log("Login failed")}/>
+            </Box>
         </Paper>
       </Container>
     </Box>

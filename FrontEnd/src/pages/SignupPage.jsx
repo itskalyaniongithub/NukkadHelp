@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Container, Typography, TextField, Button, Paper, Grid } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
+import { GoogleLogin } from '@react-oauth/google';
 
 function SignupPage() {
   const navigate = useNavigate();
@@ -83,13 +84,16 @@ function SignupPage() {
               <Button
                 fullWidth
                 variant={userType === 'provider' ? 'contained' : 'outlined'}
-                color="secondary"
+                color="primary"
                 onClick={() => handleUserTypeChange('provider')}
               >
                 Provider
               </Button>
             </Grid>
           </Grid>
+          <Box textAlign="center"  sx={{ justifyContent: 'center', display:'flex',mt: 3 }}>
+          <GoogleLogin onSuccess={(credentialResponse)=>{console.log(credentialResponse)}} onError={()=>console.log("Login failed")}/>
+            </Box>
 
           <form onSubmit={handleSubmit}>
             <TextField
@@ -98,6 +102,7 @@ function SignupPage() {
               fullWidth
               required
               margin="normal"
+              size="small" 
               value={formData.name}
               onChange={handleInputChange}
             />
@@ -108,6 +113,7 @@ function SignupPage() {
               fullWidth
               required
               margin="normal"
+               size="small"
               value={formData.email}
               onChange={handleInputChange}
             />
@@ -118,6 +124,7 @@ function SignupPage() {
               fullWidth
               required
               margin="normal"
+               size="small"
               value={formData.phone}
               onChange={handleInputChange}
             />
@@ -128,6 +135,7 @@ function SignupPage() {
               fullWidth
               required
               margin="normal"
+               size="small"
               value={formData.password}
               onChange={handleInputChange}
             />
@@ -138,6 +146,7 @@ function SignupPage() {
               fullWidth
               required
               margin="normal"
+               size="small"
               value={formData.confirmPassword}
               onChange={handleInputChange}
               error={!passwordsMatch}
@@ -153,6 +162,7 @@ function SignupPage() {
                   fullWidth
                   required
                   margin="normal"
+                   size="small"
                   value={formData.serviceType}
                   onChange={handleInputChange}
                 />
@@ -164,6 +174,7 @@ function SignupPage() {
                   fullWidth
                   required
                   margin="normal"
+                   size="small"
                   value={formData.bio}
                   onChange={handleInputChange}
                 />
@@ -182,7 +193,7 @@ function SignupPage() {
             </Button>
           </form>
           <Typography variant="body2" textAlign="center">
-            Already have an account? <Link to="/login">Sign In</Link>
+            Already have an account? <Link to="/LoginPage">Sign In</Link>
           </Typography>
         </Paper>
       </Container>

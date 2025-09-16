@@ -1,16 +1,27 @@
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
+const router = require("./router/auth");
+const connectDb = require("./utils/db");
 
 const app = express();
-app.use(cors());
+connectDb();
 app.use(express.json());
+app.use("/api/auth", router);
 
-mongoose.connect("mongodb://127.0.0.1:27017/nukkadhelp", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
+app.get("/", (req,res)=>{
+  res.status(200).send("welcome to nukkadHelp")
+});
+app.get( "/register",(req,res)=>{
+  res.status(200).send("welcome to registration")
 });
 
-app.use("/api/auth", require("./routes/auth"));
+//mongoose.connect("mongodb://127.0.0.1:27017/nukkadhelp", {
+//  useNewUrlParser: true,
+//  useUnifiedTopology: true,
+//});
 
-app.listen(5000, () => console.log("Server running on port 5000"));
+
+const PORT = process.env.PORT;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
