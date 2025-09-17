@@ -1,6 +1,6 @@
 require("dotenv").config();
 const express = require("express");
-const cors = require("cors");
+
 const mongoose = require("mongoose");
 const router = require("./router/auth");
 const connectDb = require("./utils/db");
@@ -8,6 +8,12 @@ const connectDb = require("./utils/db");
 const app = express();
 connectDb();
 app.use(express.json());
+const cors = require("cors");
+app.use(cors({
+  origin:"http://localhost:5173",
+  credentials:true
+}));
+
 app.use("/api/auth", router);
 
 app.get("/", (req,res)=>{
