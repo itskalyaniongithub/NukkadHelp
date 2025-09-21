@@ -3,18 +3,38 @@ import { Box, Container, Typography, TextField, Button, Paper, Grid } from '@mui
 import { Link, useNavigate } from 'react-router-dom';
 import googleIcon from '../assets/googleIcon.png'
 import { GoogleLogin } from '@react-oauth/google';
+import axios from "axios";
 
-function LoginPage() {
+function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [userType, setUserType] = useState('customer'); // 'customer' or 'provider'
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     // This is where you would send the email, password, and userType to your backend API
+
     console.log('Login attempt with:', { email, password, userType });
-    // In a real app, you would handle API calls here, e.g., using fetch or axios.
+    try{
+      const res = await axios.post("http://localhost:5000/api/auth/login",{
+        email,
+        password,
+        userType
+      });
+      if(res.status===200){
+         console.log("Login success:", res.data);
+        localStorage.setItem("token", res.data.token);
+        alert("Login successful!");
+      navigate("/dashboard");
+      }
+    }catch(err){
+      console.log(err);
+      alert(err.response?.data?.message || "Login failed");
+    }
+    
+
+    
   };
 
   const handleUserTypeChange = (type) => {
@@ -97,7 +117,20 @@ function LoginPage() {
           </Typography>
           
           <Box textAlign="center"  sx={{ justifyContent: 'center', display:'flex',mt: 3 }}>
-          <GoogleLogin onSuccess={(credentialResponse)=>{console.log(credentialResponse)}} onError={()=>console.log("Login failed")}/>
+          <GoogleLogin onSuccess={async(credentialResponse)=>{
+            try{
+              const res = await axios.post("http://localhost:5000/api/google-login", {
+        credential: credentialResponse.credential,
+        userType
+      });
+
+      localStorage.setItem("token", res.data.token);
+      navigate("/dashboard");
+            }
+            catch(err){
+              console.error(err);
+      alert("Google login failed");
+            }}} onError={()=>console.log("Login failed")}/>
             </Box>
         </Paper>
       </Container>
@@ -105,4 +138,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default Login;

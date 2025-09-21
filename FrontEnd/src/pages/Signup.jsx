@@ -3,11 +3,11 @@ import { Box, Container, Typography, TextField, Button, Paper, Grid } from '@mui
 import { Link, useNavigate } from 'react-router-dom';
 import { GoogleLogin } from '@react-oauth/google';
 
-function SignupPage() {
+function Signup() {
   const navigate = useNavigate();
   const [userType, setUserType] = useState('customer'); // 'customer' or 'provider'
   const [formData, setFormData] = useState({
-    name: '',
+    username: '',
     email: '',
     phone: '',
     password: '',
@@ -201,4 +201,4 @@ function SignupPage() {
   );
 }
 
-export default SignupPage;
+export default Signup;
