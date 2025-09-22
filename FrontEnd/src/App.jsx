@@ -8,7 +8,7 @@ import Electrician from "./pages/Electrician";
 import Plumbing from "./pages/Plumbing";
 import Carpenter from "./pages/Carpenter";
 import HouseHelp from "./pages/HouseHelp";
-
+import ProviderDashboard from './pages/ProvdierDashboard';
 
 // import Navbar from './components/Navbar'
 // import { ThemeProvider } from '@mui/material/styles';
@@ -30,6 +30,7 @@ function App() {
         <Route path="/plumbing" element={<Plumbing />} />
         <Route path="/carpenter" element={<Carpenter />} />
         <Route path="/househelp" element={<HouseHelp />} />
+         <Route path="/providerDashboard" element={<ProviderDashboard/>} />
       </Routes>
     </Router>
     </>
