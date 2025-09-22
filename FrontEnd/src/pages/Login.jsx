@@ -26,7 +26,7 @@ function Login() {
          console.log("Login success:", res.data);
         localStorage.setItem("token", res.data.token);
         alert("Login successful!");
-      navigate("/dashboard");
+      navigate("/LandingPage");
       }
     }catch(err){
       console.log(err);
